@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Quiro — Pricing Plans</title>
+  <meta name="description" content="Quiro pricing plans: SaaS modules, white-label, per-student, support, and credits." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: { colors: { quBlack:'#000000', quEmerald:'#10B981', quBlue:'#1E3A8A' } } } }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+  <style> body{ background:#000; color:#fff; font-family: Inter, ui-sans-serif, system-ui } .card{background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.12)} </style>
+</head>
+<body>
+  <header class="sticky top-0 z-40 bg-black/60 backdrop-blur border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+      <a href="index.html#hero" class="text-xl font-extrabold">Quiro</a>
+      <nav class="hidden md:flex items-center gap-6 text-sm">
+        <a href="index.html#features" class="hover:text-quEmerald transition">Features</a>
+        <a href="index.html#benefits" class="hover:text-quEmerald transition">Benefits</a>
+        <a href="#" class="text-quEmerald">Pricing</a>
+        <a href="index.html#cta" class="px-4 py-2 rounded-md bg-quEmerald text-black font-semibold hover:bg-emerald-500 transition">Request Info</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-6 py-12">
+    <div class="text-center mb-10">
+      <h1 class="text-3xl md:text-4xl font-extrabold">Pricing Plans</h1>
+      <p class="mt-2 text-white/70">Transparent options for institutions of all sizes</p>
+    </div>
+
+    <!-- SaaS (Per Module/Year) -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold mb-4">SaaS (Per Module/Year)</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="card rounded-xl p-6">
+          <div class="text-white/70 text-sm">Model</div>
+          <div class="text-xl font-bold">Core</div>
+          <div class="mt-2 text-quEmerald font-extrabold">₦200,000/module</div>
+          <ul class="mt-4 text-white/80 space-y-2 text-sm">
+            <li>Admissions, Registration, Fees</li>
+            <li>Basic Support</li>
+            <li>1,500 SMS Credits</li>
+          </ul>
+        </div>
+        <div class="card rounded-xl p-6">
+          <div class="text-white/70 text-sm">Model</div>
+          <div class="text-xl font-bold">Advanced</div>
+          <div class="mt-2 text-quEmerald font-extrabold">₦400,000/module</div>
+          <ul class="mt-4 text-white/80 space-y-2 text-sm">
+            <li>LMS, CBT, Transcript, Analytics</li>
+            <li>I.T./Projects, NYSC</li>
+            <li>2,500 SMS Credits</li>
+          </ul>
+        </div>
+        <div class="card rounded-xl p-6">
+          <div class="text-white/70 text-sm">Model</div>
+          <div class="text-xl font-bold">Specialized</div>
+          <div class="mt-2 text-quEmerald font-extrabold">₦600,000/module</div>
+          <ul class="mt-4 text-white/80 space-y-2 text-sm">
+            <li>Alumni, Library, Hostel</li>
+            <li>API Access</li>
+            <li>3,500 SMS Credits</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- White-Label -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold mb-4">White-Label</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="card rounded-xl p-6">
+          <div class="text-white/70 text-sm">Tier</div>
+          <div class="text-xl font-bold">Standard (&lt;10,000 students)</div>
+          <div class="mt-2 text-quEmerald font-extrabold">₦5,000,000</div>
+          <ul class="mt-4 text-white/80 space-y-2 text-sm">
+            <li>5 Core Modules</li>
+            <li>1-Year Support</li>
+            <li>NYSC Integration</li>
+          </ul>
+        </div>
+        <div class="card rounded-xl p-6">
+          <div class="text-white/70 text-sm">Tier</div>
+          <div class="text-xl font-bold">Enterprise (&gt;10,000 students)</div>
+          <div class="mt-2 text-quEmerald font-extrabold">₦10,000,000</div>
+          <ul class="mt-4 text-white/80 space-y-2 text-sm">
+            <li>All Modules, Custom Integrations</li>
+            <li>NYSC Integration</li>
+            <li>2-Year Support</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Per-Student (Per Year) -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold mb-4">Per-Student (Per Year)</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="card rounded-xl p-6">
+          <div class="text-white/70 text-sm">Tier</div>
+          <div class="text-xl font-bold">Small (&lt;5,000 students)</div>
+          <div class="mt-2 text-quEmerald font-extrabold">₦1,000/student</div>
+          <ul class="mt-4 text-white/80 space-y-2 text-sm">
+            <li>Core Modules, LMS</li>
+            <li>I.T./Projects, NYSC</li>
+            <li>Basic Support</li>
+          </ul>
+        </div>
+        <div class="card rounded-xl p-6">
+          <div class="text-white/70 text-sm">Tier</div>
+          <div class="text-xl font-bold">Medium (5,000–10,000 students)</div>
+          <div class="mt-2 text-quEmerald font-extrabold">₦800/student</div>
+          <ul class="mt-4 text-white/80 space-y-2 text-sm">
+            <li>Core Modules, LMS</li>
+            <li>I.T./Projects, NYSC</li>
+            <li>Basic Support</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Training & Support -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold mb-4">Training &amp; Support</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="card rounded-xl p-6">
+          <div class="text-white/70 text-sm">Plan</div>
+          <div class="text-xl font-bold">Basic</div>
+          <div class="mt-2 text-quEmerald font-extrabold">₦300,000/year</div>
+          <ul class="mt-4 text-white/80 space-y-2 text-sm">
+            <li>Email, Knowledge Base</li>
+            <li>4 Virtual Sessions</li>
+          </ul>
+        </div>
+        <div class="card rounded-xl p-6">
+          <div class="text-white/70 text-sm">Plan</div>
+          <div class="text-xl font-bold">Premium</div>
+          <div class="mt-2 text-quEmerald font-extrabold">₦700,000/year</div>
+          <ul class="mt-4 text-white/80 space-y-2 text-sm">
+            <li>Basic + Live Chat</li>
+            <li>3 In-Person Sessions</li>
+            <li>Dedicated Manager</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- SMS/Email Credits -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold mb-4">SMS/Email Credits</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="card rounded-xl p-6">
+          <div class="text-xl font-bold">Pay-as-you-go</div>
+          <div class="mt-2 text-white/80">₦6/SMS, ₦1.5/Email</div>
+          <div class="mt-2 text-white/70 text-sm">Flexible Notifications</div>
+        </div>
+        <div class="card rounded-xl p-6">
+          <div class="text-xl font-bold">Bundle</div>
+          <div class="mt-2 text-white/80">₦60,000</div>
+          <div class="mt-2 text-white/70 text-sm">12,000 SMS or 60,000 Emails</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mt-12">
+      <div class="bg-white/5 border border-white/10 rounded-xl p-6">
+        <p class="text-white/80"><span class="font-semibold">Example:</span> 5,000 students with 3 Core SaaS modules + Basic Support: <span class="text-quEmerald font-bold">₦900,000/year</span>, saving <span class="text-quEmerald font-bold">₦2,500,000</span> annually.</p>
+        <p class="text-white/80 mt-2"><span class="font-semibold">Discount:</span> 20% off first-year SaaS plans for contracts signed by Q4 2026.</p>
+        <p class="text-white/80 mt-2"><span class="font-semibold">Contract:</span> Exclusivity clause prevents in-house replication.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="mt-12 py-6 text-center text-white/60 border-t border-white/10">
+    <a href="index.html#hero" class="hover:text-quEmerald transition">Back to Home</a>
+  </footer>
+</body>
+</html>
+
