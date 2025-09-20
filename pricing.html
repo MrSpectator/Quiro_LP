@@ -3,68 +3,141 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Quiro — Pricing Plans</title>
+  <title>Qui(white)ro(green) — Pricing Plans</title>
+  <link rel="icon" href="images/about-hero.jpg" type="image/jpeg" />
   <meta name="description" content="Quiro pricing plans: SaaS modules, white-label, per-student, support, and credits." />
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
-    tailwind.config = { theme: { extend: { colors: { quBlack:'#000000', quEmerald:'#10B981', quBlue:'#1E3A8A' } } } }
+    tailwind.config = { 
+      theme: { 
+        extend: { 
+          colors: { 
+            quBlack:'#000000', 
+            quEmerald:'#10B981', 
+            quBlue:'#1E3A8A',
+            quGold: '#F59E0B',
+            quGray: '#6B7280'
+          },
+          fontFamily: { sans: ['Inter', 'ui-sans-serif', 'system-ui'] }
+        } 
+      } 
+    }
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
-  <style> body{ background:#000; color:#fff; font-family: Inter, ui-sans-serif, system-ui } .card{background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.12)} </style>
+  <style> 
+    :root {
+      --bg-primary: #000000;
+      --bg-secondary: #0b0b0b;
+      --text-primary: #FFFFFF;
+      --text-secondary: rgba(255, 255, 255, 0.7);
+      --accent-emerald: #10B981;
+      --accent-blue: #1E3A8A;
+      --accent-gold: #F59E0B;
+      --border-color: rgba(255, 255, 255, 0.1);
+      --card-bg: rgba(255, 255, 255, 0.05);
+      --glass-bg: rgba(255, 255, 255, 0.1);
+    }
+
+
+    body { 
+      background: var(--bg-primary); 
+      color: var(--text-primary); 
+      font-family: Inter, ui-sans-serif, system-ui;
+      transition: all 0.3s ease;
+    }
+    
+    .glass-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border-color);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+    
+    .card-mist {
+      background: linear-gradient(90deg, rgba(16,185,129,0), rgba(30,58,138,0));
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-mist::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+      transition: left 0.6s ease;
+    }
+
+    .card-mist:hover {
+      background: linear-gradient(90deg, rgba(16,185,129,.22), rgba(30,58,138,.22));
+      transform: translateY(-8px) scale(1.02);
+      border-color: var(--accent-emerald);
+      box-shadow: 0 20px 40px rgba(16, 185, 129, 0.2);
+    }
+
+    .card-mist:hover::before {
+      left: 100%;
+    }
+  </style>
 </head>
 <body>
-  <header class="sticky top-0 z-40 bg-black/60 backdrop-blur border-b border-white/10">
+  <header class="sticky top-0 z-40 bg-black/90 backdrop-blur border-b border-white/10">
     <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-      <a href="index.html#hero" class="text-xl font-extrabold">Quiro</a>
+      <a href="index.html#hero" class="text-xl font-extrabold hover:scale-105 transition-transform">
+        <span class="text-white">Qui</span><span class="text-quEmerald">ro</span>
+      </a>
       <nav class="hidden md:flex items-center gap-6 text-sm">
         <a href="index.html#features" class="hover:text-quEmerald transition">Features</a>
         <a href="index.html#benefits" class="hover:text-quEmerald transition">Benefits</a>
-        <a href="#" class="text-quEmerald">Pricing</a>
-        <a href="index.html#cta" class="px-4 py-2 rounded-md bg-quEmerald text-black font-semibold hover:bg-emerald-500 transition">Request Info</a>
+        <a href="#" class="text-quEmerald font-semibold">Pricing</a>
+        <a href="index.html#cta" class="px-4 py-2 rounded-md bg-quEmerald text-black font-semibold hover:bg-emerald-500 transition hover:scale-105">Request Info</a>
       </nav>
     </div>
   </header>
 
   <main class="max-w-7xl mx-auto px-6 py-12">
     <div class="text-center mb-10">
-      <h1 class="text-3xl md:text-4xl font-extrabold">Pricing Plans</h1>
+      <h1 class="text-3xl md:text-4xl font-extrabold bg-gradient-to-r from-quEmerald to-quBlue bg-clip-text text-transparent">Pricing Plans</h1>
       <p class="mt-2 text-white/70">Transparent options for institutions of all sizes</p>
     </div>
 
     <!-- SaaS (Per Module/Year) -->
     <section class="mb-12">
-      <h2 class="text-2xl font-bold mb-4">SaaS (Per Module/Year)</h2>
+      <h2 class="text-2xl font-bold mb-6 bg-gradient-to-r from-quEmerald to-quBlue bg-clip-text text-transparent">SaaS (Per Module/Year)</h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="card rounded-xl p-6">
-          <div class="text-white/70 text-sm">Model</div>
-          <div class="text-xl font-bold">Core</div>
-          <div class="mt-2 text-quEmerald font-extrabold">₦200,000/module</div>
+        <div class="glass-card rounded-xl p-6 card-mist group hover:scale-105 transition-transform duration-300">
+          <div class="text-white/70 text-sm mb-2">Model</div>
+          <div class="text-xl font-bold group-hover:text-quEmerald transition-colors duration-300">Core</div>
+          <div class="mt-2 text-quEmerald font-extrabold text-2xl">₦200,000/module</div>
           <ul class="mt-4 text-white/80 space-y-2 text-sm">
-            <li>Admissions, Registration, Fees</li>
-            <li>Basic Support</li>
-            <li>1,500 SMS Credits</li>
+            <li class="flex items-center"><span class="w-2 h-2 bg-quEmerald rounded-full mr-2"></span>Admissions, Registration, Fees</li>
+            <li class="flex items-center"><span class="w-2 h-2 bg-quEmerald rounded-full mr-2"></span>Basic Support</li>
+            <li class="flex items-center"><span class="w-2 h-2 bg-quEmerald rounded-full mr-2"></span>1,500 SMS Credits</li>
           </ul>
         </div>
-        <div class="card rounded-xl p-6">
-          <div class="text-white/70 text-sm">Model</div>
-          <div class="text-xl font-bold">Advanced</div>
-          <div class="mt-2 text-quEmerald font-extrabold">₦400,000/module</div>
+        <div class="glass-card rounded-xl p-6 card-mist group hover:scale-105 transition-transform duration-300">
+          <div class="text-white/70 text-sm mb-2">Model</div>
+          <div class="text-xl font-bold group-hover:text-quEmerald transition-colors duration-300">Advanced</div>
+          <div class="mt-2 text-quEmerald font-extrabold text-2xl">₦400,000/module</div>
           <ul class="mt-4 text-white/80 space-y-2 text-sm">
-            <li>LMS, CBT, Transcript, Analytics</li>
-            <li>I.T./Projects, NYSC</li>
-            <li>2,500 SMS Credits</li>
+            <li class="flex items-center"><span class="w-2 h-2 bg-quEmerald rounded-full mr-2"></span>LMS, CBT, Transcript, Analytics</li>
+            <li class="flex items-center"><span class="w-2 h-2 bg-quEmerald rounded-full mr-2"></span>I.T./Projects, NYSC</li>
+            <li class="flex items-center"><span class="w-2 h-2 bg-quEmerald rounded-full mr-2"></span>2,500 SMS Credits</li>
           </ul>
         </div>
-        <div class="card rounded-xl p-6">
-          <div class="text-white/70 text-sm">Model</div>
-          <div class="text-xl font-bold">Specialized</div>
-          <div class="mt-2 text-quEmerald font-extrabold">₦600,000/module</div>
+        <div class="glass-card rounded-xl p-6 card-mist group hover:scale-105 transition-transform duration-300">
+          <div class="text-white/70 text-sm mb-2">Model</div>
+          <div class="text-xl font-bold group-hover:text-quEmerald transition-colors duration-300">Specialized</div>
+          <div class="mt-2 text-quEmerald font-extrabold text-2xl">₦600,000/module</div>
           <ul class="mt-4 text-white/80 space-y-2 text-sm">
-            <li>Alumni, Library, Hostel</li>
-            <li>API Access</li>
-            <li>3,500 SMS Credits</li>
+            <li class="flex items-center"><span class="w-2 h-2 bg-quEmerald rounded-full mr-2"></span>Alumni, Library, Hostel</li>
+            <li class="flex items-center"><span class="w-2 h-2 bg-quEmerald rounded-full mr-2"></span>API Access</li>
+            <li class="flex items-center"><span class="w-2 h-2 bg-quEmerald rounded-full mr-2"></span>3,500 SMS Credits</li>
           </ul>
         </div>
       </div>
@@ -72,26 +145,26 @@
 
     <!-- White-Label -->
     <section class="mb-12">
-      <h2 class="text-2xl font-bold mb-4">White-Label</h2>
+      <h2 class="text-2xl font-bold mb-6 bg-gradient-to-r from-quEmerald to-quBlue bg-clip-text text-transparent">White-Label</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div class="card rounded-xl p-6">
-          <div class="text-white/70 text-sm">Tier</div>
-          <div class="text-xl font-bold">Standard (&lt;10,000 students)</div>
-          <div class="mt-2 text-quEmerald font-extrabold">₦5,000,000</div>
+        <div class="glass-card rounded-xl p-6 card-mist group hover:scale-105 transition-transform duration-300">
+          <div class="text-white/70 text-sm mb-2">Tier</div>
+          <div class="text-xl font-bold group-hover:text-quEmerald transition-colors duration-300">Standard (&lt;10,000 students)</div>
+          <div class="mt-2 text-quEmerald font-extrabold text-2xl">₦5,000,000</div>
           <ul class="mt-4 text-white/80 space-y-2 text-sm">
-            <li>5 Core Modules</li>
-            <li>1-Year Support</li>
-            <li>NYSC Integration</li>
+            <li class="flex items-center"><span class="w-2 h-2 bg-quEmerald rounded-full mr-2"></span>5 Core Modules</li>
+            <li class="flex items-center"><span class="w-2 h-2 bg-quEmerald rounded-full mr-2"></span>1-Year Support</li>
+            <li class="flex items-center"><span class="w-2 h-2 bg-quEmerald rounded-full mr-2"></span>NYSC Integration</li>
           </ul>
         </div>
-        <div class="card rounded-xl p-6">
-          <div class="text-white/70 text-sm">Tier</div>
-          <div class="text-xl font-bold">Enterprise (&gt;10,000 students)</div>
-          <div class="mt-2 text-quEmerald font-extrabold">₦10,000,000</div>
+        <div class="glass-card rounded-xl p-6 card-mist group hover:scale-105 transition-transform duration-300">
+          <div class="text-white/70 text-sm mb-2">Tier</div>
+          <div class="text-xl font-bold group-hover:text-quEmerald transition-colors duration-300">Enterprise (&gt;10,000 students)</div>
+          <div class="mt-2 text-quEmerald font-extrabold text-2xl">₦10,000,000</div>
           <ul class="mt-4 text-white/80 space-y-2 text-sm">
-            <li>All Modules, Custom Integrations</li>
-            <li>NYSC Integration</li>
-            <li>2-Year Support</li>
+            <li class="flex items-center"><span class="w-2 h-2 bg-quEmerald rounded-full mr-2"></span>All Modules, Custom Integrations</li>
+            <li class="flex items-center"><span class="w-2 h-2 bg-quEmerald rounded-full mr-2"></span>NYSC Integration</li>
+            <li class="flex items-center"><span class="w-2 h-2 bg-quEmerald rounded-full mr-2"></span>2-Year Support</li>
           </ul>
         </div>
       </div>
@@ -99,26 +172,26 @@
 
     <!-- Per-Student (Per Year) -->
     <section class="mb-12">
-      <h2 class="text-2xl font-bold mb-4">Per-Student (Per Year)</h2>
+      <h2 class="text-2xl font-bold mb-6 bg-gradient-to-r from-quEmerald to-quBlue bg-clip-text text-transparent">Per-Student (Per Year)</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div class="card rounded-xl p-6">
-          <div class="text-white/70 text-sm">Tier</div>
-          <div class="text-xl font-bold">Small (&lt;5,000 students)</div>
-          <div class="mt-2 text-quEmerald font-extrabold">₦1,000/student</div>
+        <div class="glass-card rounded-xl p-6 card-mist group hover:scale-105 transition-transform duration-300">
+          <div class="text-white/70 text-sm mb-2">Tier</div>
+          <div class="text-xl font-bold group-hover:text-quEmerald transition-colors duration-300">Small (&lt;5,000 students)</div>
+          <div class="mt-2 text-quEmerald font-extrabold text-2xl">₦1,000/student</div>
           <ul class="mt-4 text-white/80 space-y-2 text-sm">
-            <li>Core Modules, LMS</li>
-            <li>I.T./Projects, NYSC</li>
-            <li>Basic Support</li>
+            <li class="flex items-center"><span class="w-2 h-2 bg-quEmerald rounded-full mr-2"></span>Core Modules, LMS</li>
+            <li class="flex items-center"><span class="w-2 h-2 bg-quEmerald rounded-full mr-2"></span>I.T./Projects, NYSC</li>
+            <li class="flex items-center"><span class="w-2 h-2 bg-quEmerald rounded-full mr-2"></span>Basic Support</li>
           </ul>
         </div>
-        <div class="card rounded-xl p-6">
-          <div class="text-white/70 text-sm">Tier</div>
-          <div class="text-xl font-bold">Medium (5,000–10,000 students)</div>
-          <div class="mt-2 text-quEmerald font-extrabold">₦800/student</div>
+        <div class="glass-card rounded-xl p-6 card-mist group hover:scale-105 transition-transform duration-300">
+          <div class="text-white/70 text-sm mb-2">Tier</div>
+          <div class="text-xl font-bold group-hover:text-quEmerald transition-colors duration-300">Medium (5,000–10,000 students)</div>
+          <div class="mt-2 text-quEmerald font-extrabold text-2xl">₦800/student</div>
           <ul class="mt-4 text-white/80 space-y-2 text-sm">
-            <li>Core Modules, LMS</li>
-            <li>I.T./Projects, NYSC</li>
-            <li>Basic Support</li>
+            <li class="flex items-center"><span class="w-2 h-2 bg-quEmerald rounded-full mr-2"></span>Core Modules, LMS</li>
+            <li class="flex items-center"><span class="w-2 h-2 bg-quEmerald rounded-full mr-2"></span>I.T./Projects, NYSC</li>
+            <li class="flex items-center"><span class="w-2 h-2 bg-quEmerald rounded-full mr-2"></span>Basic Support</li>
           </ul>
         </div>
       </div>
@@ -126,25 +199,25 @@
 
     <!-- Training & Support -->
     <section class="mb-12">
-      <h2 class="text-2xl font-bold mb-4">Training &amp; Support</h2>
+      <h2 class="text-2xl font-bold mb-6 bg-gradient-to-r from-quEmerald to-quBlue bg-clip-text text-transparent">Training &amp; Support</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div class="card rounded-xl p-6">
-          <div class="text-white/70 text-sm">Plan</div>
-          <div class="text-xl font-bold">Basic</div>
-          <div class="mt-2 text-quEmerald font-extrabold">₦300,000/year</div>
+        <div class="glass-card rounded-xl p-6 card-mist group hover:scale-105 transition-transform duration-300">
+          <div class="text-white/70 text-sm mb-2">Plan</div>
+          <div class="text-xl font-bold group-hover:text-quEmerald transition-colors duration-300">Basic</div>
+          <div class="mt-2 text-quEmerald font-extrabold text-2xl">₦300,000/year</div>
           <ul class="mt-4 text-white/80 space-y-2 text-sm">
-            <li>Email, Knowledge Base</li>
-            <li>4 Virtual Sessions</li>
+            <li class="flex items-center"><span class="w-2 h-2 bg-quEmerald rounded-full mr-2"></span>Email, Knowledge Base</li>
+            <li class="flex items-center"><span class="w-2 h-2 bg-quEmerald rounded-full mr-2"></span>4 Virtual Sessions</li>
           </ul>
         </div>
-        <div class="card rounded-xl p-6">
-          <div class="text-white/70 text-sm">Plan</div>
-          <div class="text-xl font-bold">Premium</div>
-          <div class="mt-2 text-quEmerald font-extrabold">₦700,000/year</div>
+        <div class="glass-card rounded-xl p-6 card-mist group hover:scale-105 transition-transform duration-300">
+          <div class="text-white/70 text-sm mb-2">Plan</div>
+          <div class="text-xl font-bold group-hover:text-quEmerald transition-colors duration-300">Premium</div>
+          <div class="mt-2 text-quEmerald font-extrabold text-2xl">₦700,000/year</div>
           <ul class="mt-4 text-white/80 space-y-2 text-sm">
-            <li>Basic + Live Chat</li>
-            <li>3 In-Person Sessions</li>
-            <li>Dedicated Manager</li>
+            <li class="flex items-center"><span class="w-2 h-2 bg-quEmerald rounded-full mr-2"></span>Basic + Live Chat</li>
+            <li class="flex items-center"><span class="w-2 h-2 bg-quEmerald rounded-full mr-2"></span>3 In-Person Sessions</li>
+            <li class="flex items-center"><span class="w-2 h-2 bg-quEmerald rounded-full mr-2"></span>Dedicated Manager</li>
           </ul>
         </div>
       </div>
@@ -152,32 +225,32 @@
 
     <!-- SMS/Email Credits -->
     <section class="mb-12">
-      <h2 class="text-2xl font-bold mb-4">SMS/Email Credits</h2>
+      <h2 class="text-2xl font-bold mb-6 bg-gradient-to-r from-quEmerald to-quBlue bg-clip-text text-transparent">SMS/Email Credits</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div class="card rounded-xl p-6">
-          <div class="text-xl font-bold">Pay-as-you-go</div>
-          <div class="mt-2 text-white/80">₦6/SMS, ₦1.5/Email</div>
+        <div class="glass-card rounded-xl p-6 card-mist group hover:scale-105 transition-transform duration-300">
+          <div class="text-xl font-bold group-hover:text-quEmerald transition-colors duration-300">Pay-as-you-go</div>
+          <div class="mt-2 text-white/80 text-lg">₦6/SMS, ₦1.5/Email</div>
           <div class="mt-2 text-white/70 text-sm">Flexible Notifications</div>
         </div>
-        <div class="card rounded-xl p-6">
-          <div class="text-xl font-bold">Bundle</div>
-          <div class="mt-2 text-white/80">₦60,000</div>
+        <div class="glass-card rounded-xl p-6 card-mist group hover:scale-105 transition-transform duration-300">
+          <div class="text-xl font-bold group-hover:text-quEmerald transition-colors duration-300">Bundle</div>
+          <div class="mt-2 text-white/80 text-lg">₦60,000</div>
           <div class="mt-2 text-white/70 text-sm">12,000 SMS or 60,000 Emails</div>
         </div>
       </div>
     </section>
 
     <section class="mt-12">
-      <div class="bg-white/5 border border-white/10 rounded-xl p-6">
-        <p class="text-white/80"><span class="font-semibold">Example:</span> 5,000 students with 3 Core SaaS modules + Basic Support: <span class="text-quEmerald font-bold">₦900,000/year</span>, saving <span class="text-quEmerald font-bold">₦2,500,000</span> annually.</p>
-        <p class="text-white/80 mt-2"><span class="font-semibold">Discount:</span> 20% off first-year SaaS plans for contracts signed by Q4 2026.</p>
-        <p class="text-white/80 mt-2"><span class="font-semibold">Contract:</span> Exclusivity clause prevents in-house replication.</p>
+      <div class="glass-card rounded-xl p-6">
+        <p class="text-white/80"><span class="font-semibold text-quEmerald">Example:</span> 5,000 students with 3 Core SaaS modules + Basic Support: <span class="text-quEmerald font-bold">₦900,000/year</span>, saving <span class="text-quEmerald font-bold">₦2,500,000</span> annually.</p>
+        <p class="text-white/80 mt-2"><span class="font-semibold text-quEmerald">Discount:</span> 20% off first-year SaaS plans for contracts signed by Q4 2026.</p>
+        <p class="text-white/80 mt-2"><span class="font-semibold text-quEmerald">Contract:</span> Exclusivity clause prevents in-house replication.</p>
       </div>
     </section>
   </main>
 
-  <footer class="mt-12 py-6 text-center text-white/60 border-t border-white/10">
-    <a href="index.html#hero" class="hover:text-quEmerald transition">Back to Home</a>
+  <footer class="mt-12 py-6 text-center text-white/60 border-t border-white/10 glass">
+    <a href="index.html#hero" class="hover:text-quEmerald transition hover:scale-105 inline-block">← Back to Home</a>
   </footer>
 </body>
 </html>

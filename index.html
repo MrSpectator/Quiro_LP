@@ -15,6 +15,23 @@
   <meta property="og:url" content="https://yourplatform.com" />
   <meta property="og:image" content="https://images.unsplash.com/photo-1588072432836-e10032774350?q=80&w=1600&auto=format&fit=crop" />
 
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Quiro",
+    "description": "University management solution for Nigerian universities with JAMB/NYSC integration",
+    "applicationCategory": "EducationalApplication",
+    "operatingSystem": "Web",
+    "offers": {
+      "@type": "Offer",
+      "price": "200000",
+      "priceCurrency": "NGN"
+    }
+  }
+  </script>
+
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -29,9 +46,17 @@
           colors: {
             quBlack: '#000000',
             quEmerald: '#10B981',
-            quBlue: '#1E3A8A'
+            quBlue: '#1E3A8A',
+            quGold: '#F59E0B',
+            quGray: '#6B7280'
           },
-          fontFamily: { sans: ['Inter', 'ui-sans-serif', 'system-ui'] }
+          fontFamily: { sans: ['Inter', 'ui-sans-serif', 'system-ui'] },
+          animation: {
+            'float': 'float 6s ease-in-out infinite',
+            'glow': 'glow 2s ease-in-out infinite alternate',
+            'slide-up': 'slideUp 0.5s ease-out',
+            'fade-in': 'fadeIn 0.6s ease-out'
+          }
         }
       }
     }
@@ -47,75 +72,209 @@
   <link rel="preload" as="image" href="https://images.unsplash.com/photo-1588072432836-e10032774350?q=80&w=1600&auto=format&fit=crop" />
 
   <style>
-    html { scroll-behavior: smooth; }
-    body { background:#000000; color:#FFFFFF; font-family: Inter, ui-sans-serif, system-ui; }
+    :root {
+      --bg-primary: #000000;
+      --bg-secondary: #0b0b0b;
+      --text-primary: #FFFFFF;
+      --text-secondary: rgba(255, 255, 255, 0.7);
+      --accent-emerald: #10B981;
+      --accent-blue: #1E3A8A;
+      --accent-gold: #F59E0B;
+      --border-color: rgba(255, 255, 255, 0.1);
+      --card-bg: rgba(255, 255, 255, 0.05);
+      --glass-bg: rgba(255, 255, 255, 0.1);
+      --shadow-glow: 0 0 20px rgba(16, 185, 129, 0.3);
+    }
+
+    html { 
+      scroll-behavior: smooth; 
+      transition: all 0.3s ease;
+    }
+    
+    body { 
+      background: var(--bg-primary); 
+      color: var(--text-primary); 
+      font-family: Inter, ui-sans-serif, system-ui;
+      transition: all 0.3s ease;
+    }
+
+
+    /* Glassmorphism Effects */
+    .glass {
+      background: var(--glass-bg);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border-color);
+    }
+
+    .glass-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border-color);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+
     /* Mist-like gradient animation */
     .mist {
-      position:absolute; inset:0; pointer-events:none;
+      position: absolute; 
+      inset: 0; 
+      pointer-events: none;
       background: radial-gradient(60% 60% at 20% 30%, rgba(16,185,129,.25), rgba(16,185,129,0) 60%),
                   radial-gradient(50% 50% at 80% 70%, rgba(30,58,138,.25), rgba(30,58,138,0) 60%);
-      opacity:.35; animation: mistPulse 6s ease-in-out infinite alternate;
+      opacity: .35; 
+      animation: mistPulse 6s ease-in-out infinite alternate;
       mix-blend-mode: screen;
     }
+
+
     @keyframes mistPulse {
-      0% { opacity:.25; filter: blur(14px); }
-      100% { opacity:.5; filter: blur(22px); }
+      0% { opacity: .25; filter: blur(14px); }
+      100% { opacity: .5; filter: blur(22px); }
     }
-    /* Hover mist for cards */
+
+    /* Enhanced card hover effects */
     .card-mist {
       background: linear-gradient(90deg, rgba(16,185,129,0), rgba(30,58,138,0));
-      transition: background .5s ease, transform .35s ease, border-color .35s ease;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
     }
+
+    .card-mist::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+      transition: left 0.6s ease;
+    }
+
     .card-mist:hover {
       background: linear-gradient(90deg, rgba(16,185,129,.22), rgba(30,58,138,.22));
-      transform: translateY(-4px);
-      border-color: rgba(255,255,255,.25);
+      transform: translateY(-8px) scale(1.02);
+      border-color: var(--accent-emerald);
+      box-shadow: 0 20px 40px rgba(16, 185, 129, 0.2);
     }
-    /* CTA input glow */
+
+    .card-mist:hover::before {
+      left: 100%;
+    }
+
+    /* Enhanced input glow */
     .glow-input:focus {
       outline: none;
       box-shadow: 0 0 0 3px rgba(16,185,129,.35), 0 0 18px rgba(30,58,138,.45);
-      border-color: rgba(30,58,138,.8);
-      transition: box-shadow .3s, border-color .3s;
+      border-color: var(--accent-emerald);
+      transition: all 0.3s ease;
+      transform: scale(1.02);
     }
-    /* Simple carousel transitions */
-    .fade-enter { opacity:0; transform: translateY(8px); }
-    .fade-enter-active { opacity:1; transform: translateY(0); transition: all .5s ease; }
-    .fade-exit { opacity:1; transform: translateY(0); }
-    .fade-exit-active { opacity:0; transform: translateY(-8px); transition: all .5s ease; }
+
+    /* Loading skeleton */
+    .skeleton {
+      background: linear-gradient(90deg, var(--card-bg) 25%, var(--border-color) 50%, var(--card-bg) 75%);
+      background-size: 200% 100%;
+      animation: loading 1.5s infinite;
+    }
+
+    @keyframes loading {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    /* Enhanced animations */
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @keyframes glow {
+      0% { box-shadow: 0 0 5px var(--accent-emerald); }
+      100% { box-shadow: 0 0 20px var(--accent-emerald), 0 0 30px var(--accent-emerald); }
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* Carousel transitions */
+    .fade-enter { opacity: 0; transform: translateY(8px); }
+    .fade-enter-active { opacity: 1; transform: translateY(0); transition: all .5s ease; }
+    .fade-exit { opacity: 1; transform: translateY(0); }
+    .fade-exit-active { opacity: 0; transform: translateY(-8px); transition: all .5s ease; }
 
     /* Coming Soon badge styling */
     @keyframes glowFade {
-      0% { opacity:.35; transform: scale(.98); box-shadow: 0 0 12px rgba(16,185,129,.18), 0 0 0 0 rgba(30,58,138,.0); }
-      50% { opacity:1; transform: scale(1.06); box-shadow: 0 0 26px rgba(16,185,129,.35), 0 0 60px rgba(30,58,138,.25); }
-      100% { opacity:.35; transform: scale(.98); box-shadow: 0 0 12px rgba(16,185,129,.18), 0 0 0 0 rgba(30,58,138,.0); }
+      0% { opacity: .35; transform: scale(.98); box-shadow: 0 0 12px rgba(16,185,129,.18), 0 0 0 0 rgba(30,58,138,.0); }
+      50% { opacity: 1; transform: scale(1.06); box-shadow: 0 0 26px rgba(16,185,129,.35), 0 0 60px rgba(30,58,138,.25); }
+      100% { opacity: .35; transform: scale(.98); box-shadow: 0 0 12px rgba(16,185,129,.18), 0 0 0 0 rgba(30,58,138,.0); }
     }
+
     .coming-soon {
-      display:inline-flex; align-items:center; gap:.5rem;
-      padding:.9rem 1.25rem; border-radius:9999px;
-      border:1px solid rgba(255,255,255,.22);
+      display: inline-flex; 
+      align-items: center; 
+      gap: .5rem;
+      padding: .9rem 1.25rem; 
+      border-radius: 9999px;
+      border: 1px solid var(--border-color);
       background: linear-gradient(90deg, rgba(16,185,129,.12), rgba(30,58,138,.12));
-      color:#fff; letter-spacing:.06em; font-weight:800;
-      font-size:1.05rem;
+      color: var(--text-primary); 
+      letter-spacing: .06em; 
+      font-weight: 800;
+      font-size: 1.05rem;
       animation: glowFade 2.6s ease-in-out infinite;
       backdrop-filter: blur(6px);
     }
-    .coming-dot { width:.5rem; height:.5rem; border-radius:9999px; background:#10B981; box-shadow:0 0 14px rgba(16,185,129,.8); }
-    .coming-soon--lg { font-size:1.4rem; padding:1.1rem 1.6rem; }
-    @media (min-width:768px){ .coming-soon--lg{ font-size:1.6rem; padding:1.2rem 1.8rem; } }
 
-    /* Typing effect for text + hide/show entire badge */
-    .typing { display:inline-block; overflow:hidden; white-space:nowrap; border-right:2px solid rgba(255,255,255,.75); }
-    .typing { animation: typingCycle 5s steps(var(--chars, 11)) 0s infinite; }
+    .coming-dot { 
+      width: .5rem; 
+      height: .5rem; 
+      border-radius: 9999px; 
+      background: var(--accent-emerald); 
+      box-shadow: 0 0 14px rgba(16,185,129,.8); 
+    }
+
+    .coming-soon--lg { 
+      font-size: 1.4rem; 
+      padding: 1.1rem 1.6rem; 
+    }
+
+    @media (min-width: 768px) { 
+      .coming-soon--lg { 
+        font-size: 1.6rem; 
+        padding: 1.2rem 1.8rem; 
+      } 
+    }
+
+    /* Typing effect */
+    .typing { 
+      display: inline-block; 
+      overflow: hidden; 
+      white-space: nowrap; 
+      border-right: 2px solid var(--text-primary); 
+      animation: typingCycle 5s steps(var(--chars, 11)) 0s infinite; 
+    }
+
     @keyframes typingCycle {
-      0% { width: 0; opacity: 1; border-right-color: rgba(255,255,255,.75); }
-      65% { width: calc(var(--chars, 11) * 1ch); opacity: 1; border-right-color: rgba(255,255,255,.75); }
+      0% { width: 0; opacity: 1; border-right-color: var(--text-primary); }
+      65% { width: calc(var(--chars, 11) * 1ch); opacity: 1; border-right-color: var(--text-primary); }
       70% { width: calc(var(--chars, 11) * 1ch); opacity: 1; }
       75% { width: calc(var(--chars, 11) * 1ch); opacity: 0; }
       95% { width: 0; opacity: 0; }
       100% { width: 0; opacity: 1; }
     }
-    .coming-cycle { animation: badgeCycle 5s linear infinite; display:inline-flex; }
+
+    .coming-cycle { 
+      animation: badgeCycle 5s linear infinite; 
+      display: inline-flex; 
+    }
+
     @keyframes badgeCycle {
       0% { opacity: 1; visibility: visible; }
       70% { opacity: 1; visibility: visible; }
@@ -123,15 +282,56 @@
       95% { opacity: 0; visibility: hidden; }
       100% { opacity: 1; visibility: visible; }
     }
+
+    /* Progress bars */
+    .progress-bar {
+      height: 4px;
+      background: var(--card-bg);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent-emerald), var(--accent-blue));
+      border-radius: 2px;
+      transition: width 0.3s ease;
+    }
+
+    /* Mobile optimizations */
+    @media (max-width: 768px) {
+      .card-mist:hover {
+        transform: translateY(-4px) scale(1.01);
+      }
+    }
+
+    /* High contrast mode support */
+    @media (prefers-contrast: high) {
+      :root {
+        --border-color: rgba(255, 255, 255, 0.3);
+        --card-bg: rgba(255, 255, 255, 0.1);
+      }
+    }
+
+    /* Reduced motion support */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
   </style>
   <!-- Analytics (optional) -->
   <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script> -->
 </head>
 <body>
   <!-- Navbar -->
-  <header class="fixed top-0 left-0 right-0 z-40 bg-black/50 backdrop-blur border-b border-white/10">
+  <header class="fixed top-0 left-0 right-0 z-40 bg-black/90 backdrop-blur border-b border-white/10">
     <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-      <a href="#hero" class="text-xl font-extrabold">Quiro</a>
+      <a href="#hero" class="text-xl font-extrabold hover:scale-105 transition-transform">
+        <span class="text-white">Qui</span><span class="text-quEmerald">ro</span>
+      </a>
       <nav class="hidden md:flex items-center gap-6 text-sm">
         <a href="#features" class="hover:text-quEmerald transition">Features</a>
         <a href="#benefits" class="hover:text-quEmerald transition">Benefits</a>
@@ -144,7 +344,7 @@
       </button>
     </div>
     <!-- Mobile menu -->
-    <div id="mobile-menu" class="md:hidden hidden border-t border-white/10 bg-black/90 backdrop-blur">
+    <div id="mobile-menu" class="md:hidden hidden border-t border-white/10 glass">
       <div class="px-4 py-3 flex flex-col gap-3 text-sm">
         <a href="#features" class="hover:text-quEmerald transition">Features</a>
         <a href="#benefits" class="hover:text-quEmerald transition">Benefits</a>
@@ -160,25 +360,53 @@
   <section id="hero" class="relative h-screen flex items-center justify-center overflow-hidden">
     <img src="images/about-hero.jpg"
          alt="Nigerian university campus"
-         class="absolute inset-0 w-full h-full object-cover opacity-40"
+         class="absolute inset-0 w-full h-full object-cover opacity-40 transition-opacity duration-500"
          onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1588072432836-e10032774350?q=80&w=2000&auto=format&fit=crop';" />
     <div class="mist" aria-hidden="true"></div>
     <div id="particles-hero" class="absolute inset-0" aria-hidden="true"></div>
 
+    <!-- Floating geometric shapes -->
+    <div class="absolute inset-0 pointer-events-none">
+      <div class="absolute top-20 left-10 w-4 h-4 bg-quEmerald/30 rounded-full animate-float"></div>
+      <div class="absolute top-40 right-20 w-6 h-6 bg-quBlue/30 rounded-full animate-float" style="animation-delay: 1s;"></div>
+      <div class="absolute bottom-40 left-20 w-3 h-3 bg-quGold/30 rounded-full animate-float" style="animation-delay: 2s;"></div>
+      <div class="absolute bottom-20 right-10 w-5 h-5 bg-quEmerald/20 rounded-full animate-float" style="animation-delay: 3s;"></div>
+    </div>
+
     <div class="relative z-10 max-w-4xl mx-auto text-center px-6">
       <h1 id="hero-title" class="text-4xl md:text-6xl font-extrabold leading-tight opacity-0 flex items-center justify-center gap-3">
-        <span>Revolutionize Your University with Quiro</span>
+        <span class="bg-gradient-to-r from-quEmerald to-quBlue bg-clip-text text-transparent">
+          Revolutionize Your University with Quiro
+        </span>
       </h1>
       <p id="hero-sub" class="mt-4 text-lg md:text-2xl text-white/90 opacity-0">
         65% Time Savings, Seamless JAMB/NYSC Compliance
       </p>
+      
+      <!-- ROI Calculator Preview -->
+      <div class="mt-6 opacity-0 glass-card rounded-xl p-4 max-w-md mx-auto" id="roi-preview">
+        <div class="flex items-center justify-between text-sm">
+          <span class="text-white/70">Potential Annual Savings:</span>
+          <span class="text-quEmerald font-bold text-lg">₦7.9M</span>
+        </div>
+        <div class="progress-bar mt-2">
+          <div class="progress-fill" style="width: 65%"></div>
+        </div>
+      </div>
+
       <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center opacity-0" id="hero-cta">
         <a href="#cta"
-           class="inline-flex items-center justify-center px-6 py-3 rounded-md bg-quEmerald text-black font-semibold hover:bg-emerald-500 transition">
+           class="inline-flex items-center justify-center px-6 py-3 rounded-md bg-quEmerald text-black font-semibold hover:bg-emerald-500 transition hover:scale-105 hover:shadow-lg">
+          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+          </svg>
           Request Info
         </a>
         <a href="#features"
-           class="inline-flex items-center justify-center px-6 py-3 rounded-md border border-white/20 hover:border-white/40 transition">
+           class="inline-flex items-center justify-center px-6 py-3 rounded-md border border-white/20 hover:border-white/40 transition hover:scale-105 glass">
+          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
           Explore Features
         </a>
       </div>
@@ -195,127 +423,218 @@
   </section>
 
   <!-- Features -->
-  <section id="features" class="relative py-20 bg-[#0b0b0b]">
+  <section id="features" class="relative py-20" style="background: var(--bg-secondary);">
     <div class="mist" aria-hidden="true" style="opacity:.18"></div>
     <div class="max-w-7xl mx-auto px-6 relative">
       <div class="text-center mb-12">
-        <h2 class="text-3xl md:text-4xl font-extrabold">Advanced Features, Built for Nigeria</h2>
+        <h2 class="text-3xl md:text-4xl font-extrabold bg-gradient-to-r from-quEmerald to-quBlue bg-clip-text text-transparent">
+          Advanced Features, Built for Nigeria
+        </h2>
         <p class="mt-3 text-white/70">Role-based access, JAMB/NYSC compliance, and low-bandwidth optimization.</p>
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         <!-- Six feature cards -->
-        <div class="p-6 rounded-xl border border-white/10 bg-white/5 card-mist feature-card opacity-0">
-          <div class="w-10 h-10 rounded bg-quEmerald/20 text-quEmerald flex items-center justify-center mb-4">
+        <div class="p-6 rounded-xl glass-card card-mist feature-card opacity-0 group">
+          <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-quEmerald/20 to-quBlue/20 text-quEmerald flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
             <!-- Academic Cap -->
             <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 14l9-5-9-5-9 5 9 5z" />
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 14l6.16-3.422A12.083 12.083 0 0112 21.5a12.083 12.083 0 01-6.16-10.922L12 14z" />
             </svg>
           </div>
-          <h3 class="font-bold text-xl">Admissions (JAMB CAPS)</h3>
+          <h3 class="font-bold text-xl group-hover:text-quEmerald transition-colors duration-300">Admissions (JAMB CAPS)</h3>
           <p class="mt-2 text-white/70">Post-UTME automation with JAMB CAPS integration, e-docs, and e-signatures.</p>
+          <div class="mt-4 flex items-center text-quEmerald text-sm font-medium">
+            <span class="w-2 h-2 bg-quEmerald rounded-full mr-2"></span>
+            JAMB Compliant
+          </div>
         </div>
 
-        <div class="p-6 rounded-xl border border-white/10 bg-white/5 card-mist feature-card opacity-0">
-          <div class="w-10 h-10 rounded bg-quEmerald/20 text-quEmerald flex items-center justify-center mb-4">
+        <div class="p-6 rounded-xl glass-card card-mist feature-card opacity-0 group">
+          <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-quEmerald/20 to-quBlue/20 text-quEmerald flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
             <!-- Document Text -->
             <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h7l5 5v12a2 2 0 01-2 2z" />
             </svg>
           </div>
-          <h3 class="font-bold text-xl">Docket Generation</h3>
+          <h3 class="font-bold text-xl group-hover:text-quEmerald transition-colors duration-300">Docket Generation</h3>
           <p class="mt-2 text-white/70">Self-generated booklets and clearance dockets—no queues, fewer errors.</p>
+          <div class="mt-4 flex items-center text-quEmerald text-sm font-medium">
+            <span class="w-2 h-2 bg-quEmerald rounded-full mr-2"></span>
+            Zero Queues
+          </div>
         </div>
 
-        <div class="p-6 rounded-xl border border-white/10 bg-white/5 card-mist feature-card opacity-0">
-          <div class="w-10 h-10 rounded bg-quEmerald/20 text-quEmerald flex items-center justify-center mb-4">
+        <div class="p-6 rounded-xl glass-card card-mist feature-card opacity-0 group">
+          <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-quEmerald/20 to-quBlue/20 text-quEmerald flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
             <!-- Shield Check -->
             <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
           </div>
-          <h3 class="font-bold text-xl">NYSC Integration</h3>
+          <h3 class="font-bold text-xl group-hover:text-quEmerald transition-colors duration-300">NYSC Integration</h3>
           <p class="mt-2 text-white/70">Automated clearance and mobilization with audit-ready logs.</p>
+          <div class="mt-4 flex items-center text-quEmerald text-sm font-medium">
+            <span class="w-2 h-2 bg-quEmerald rounded-full mr-2"></span>
+            NYSC Compliant
+          </div>
         </div>
 
-        <div class="p-6 rounded-xl border border-white/10 bg-white/5 card-mist feature-card opacity-0">
-          <div class="w-10 h-10 rounded bg-quEmerald/20 text-quEmerald flex items-center justify-center mb-4">
+        <div class="p-6 rounded-xl glass-card card-mist feature-card opacity-0 group">
+          <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-quEmerald/20 to-quBlue/20 text-quEmerald flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
             <!-- Presentation Chart -->
             <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 4h18M4 8h16v10a2 2 0 01-2 2H6a2 2 0 01-2-2V8z" />
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 12l2 2 4-4" />
             </svg>
           </div>
-          <h3 class="font-bold text-xl">LMS</h3>
+          <h3 class="font-bold text-xl group-hover:text-quEmerald transition-colors duration-300">LMS</h3>
           <p class="mt-2 text-white/70">Grading, announcements, materials—role-based access for HODs and faculty.</p>
+          <div class="mt-4 flex items-center text-quEmerald text-sm font-medium">
+            <span class="w-2 h-2 bg-quEmerald rounded-full mr-2"></span>
+            Role-Based Access
+          </div>
         </div>
 
-        <div class="p-6 rounded-xl border border-white/10 bg-white/5 card-mist feature-card opacity-0">
-          <div class="w-10 h-10 rounded bg-quEmerald/20 text-quEmerald flex items-center justify-center mb-4">
+        <div class="p-6 rounded-xl glass-card card-mist feature-card opacity-0 group">
+          <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-quEmerald/20 to-quBlue/20 text-quEmerald flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
             <!-- Calendar -->
             <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3M4 11h16M5 21h14a2 2 0 002-2V9a2 2 0 00-2-2H5A2 2 0 003 9v10a2 2 0 002 2z" />
             </svg>
           </div>
-          <h3 class="font-bold text-xl">Timetable Scheduling</h3>
+          <h3 class="font-bold text-xl group-hover:text-quEmerald transition-colors duration-300">Timetable Scheduling</h3>
           <p class="mt-2 text-white/70">Conflict-free scheduling with rooms, lecturers, and course constraints.</p>
+          <div class="mt-4 flex items-center text-quEmerald text-sm font-medium">
+            <span class="w-2 h-2 bg-quEmerald rounded-full mr-2"></span>
+            Conflict-Free
+          </div>
         </div>
 
-        <div class="p-6 rounded-xl border border-white/10 bg-white/5 card-mist feature-card opacity-0">
-          <div class="w-10 h-10 rounded bg-quEmerald/20 text-quEmerald flex items-center justify-center mb-4">
+        <div class="p-6 rounded-xl glass-card card-mist feature-card opacity-0 group">
+          <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-quEmerald/20 to-quBlue/20 text-quEmerald flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
             <!-- Clipboard List -->
             <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5h6m-9 4h12M7 13h10m-8 4h6" />
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 3h6a2 2 0 012 2v2H7V5a2 2 0 012-2z" />
             </svg>
           </div>
-          <h3 class="font-bold text-xl">I.T./Projects Portal</h3>
+          <h3 class="font-bold text-xl group-hover:text-quEmerald transition-colors duration-300">I.T./Projects Portal</h3>
           <p class="mt-2 text-white/70">Track student I.T./projects, supervision, and NYSC readiness.</p>
+          <div class="mt-4 flex items-center text-quEmerald text-sm font-medium">
+            <span class="w-2 h-2 bg-quEmerald rounded-full mr-2"></span>
+            Project Tracking
+          </div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Benefits & Testimonials -->
-  <section id="benefits" class="relative py-20 bg-black">
+  <section id="benefits" class="relative py-20" style="background: var(--bg-primary);">
     <div class="max-w-7xl mx-auto px-6">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
         <!-- Benefits with counters -->
         <div>
-          <h2 class="text-3xl md:text-4xl font-extrabold">Potential Impact</h2>
+          <h2 class="text-3xl md:text-4xl font-extrabold bg-gradient-to-r from-quEmerald to-quBlue bg-clip-text text-transparent">
+            Potential Impact
+          </h2>
           <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <div class="p-6 rounded-xl border border-white/10 bg-white/5">
-              <div class="text-4xl font-extrabold text-quEmerald"><span class="counter" data-target="65">0</span>%</div>
-              <div class="mt-2 text-white/70">Admin time savings (~NGN 2.5M/year)</div>
+            <div class="p-6 rounded-xl glass-card group hover:scale-105 transition-transform duration-300">
+              <div class="text-4xl font-extrabold text-quEmerald group-hover:scale-110 transition-transform duration-300">
+                <span class="counter" data-target="65">0</span>%
             </div>
-            <div class="p-6 rounded-xl border border-white/10 bg-white/5">
-              <div class="text-4xl font-extrabold text-quEmerald"><span class="counter" data-target="90">0</span>%</div>
+              <div class="mt-2 text-white/70">Admin time savings</div>
+              <div class="mt-1 text-quEmerald font-semibold text-sm">~NGN 2.5M/year</div>
+              <div class="progress-bar mt-3">
+                <div class="progress-fill" style="width: 65%"></div>
+              </div>
+            </div>
+            <div class="p-6 rounded-xl glass-card group hover:scale-105 transition-transform duration-300">
+              <div class="text-4xl font-extrabold text-quEmerald group-hover:scale-110 transition-transform duration-300">
+                <span class="counter" data-target="90">0</span>%
+              </div>
               <div class="mt-2 text-white/70">User adoption</div>
+              <div class="mt-1 text-quEmerald font-semibold text-sm">Expected uptake</div>
+              <div class="progress-bar mt-3">
+                <div class="progress-fill" style="width: 90%"></div>
             </div>
-            <div class="p-6 rounded-xl border border-white/10 bg-white/5">
-              <div class="text-4xl font-extrabold text-quEmerald"><span class="counter" data-target="100">0</span>%</div>
+            </div>
+            <div class="p-6 rounded-xl glass-card group hover:scale-105 transition-transform duration-300">
+              <div class="text-4xl font-extrabold text-quEmerald group-hover:scale-110 transition-transform duration-300">
+                <span class="counter" data-target="100">0</span>%
+              </div>
               <div class="mt-2 text-white/70">JAMB/NYSC compliance</div>
+              <div class="mt-1 text-quEmerald font-semibold text-sm">Fully compliant</div>
+              <div class="progress-bar mt-3">
+                <div class="progress-fill" style="width: 100%"></div>
             </div>
-            <div class="p-6 rounded-xl border border-white/10 bg-white/5">
-              <div class="text-4xl font-extrabold text-quEmerald"><span class="counter" data-target="40">0</span>%</div>
+            </div>
+            <div class="p-6 rounded-xl glass-card group hover:scale-105 transition-transform duration-300">
+              <div class="text-4xl font-extrabold text-quEmerald group-hover:scale-110 transition-transform duration-300">
+                <span class="counter" data-target="40">0</span>%
+              </div>
               <div class="mt-2 text-white/70">Student satisfaction increase</div>
+              <div class="mt-1 text-quEmerald font-semibold text-sm">Improved experience</div>
+              <div class="progress-bar mt-3">
+                <div class="progress-fill" style="width: 40%"></div>
             </div>
-            <div class="p-6 rounded-xl border border-white/10 bg-white/5">
-              <div class="text-4xl font-extrabold text-quEmerald"><span class="counter" data-target="80">0</span>%</div>
+            </div>
+            <div class="p-6 rounded-xl glass-card group hover:scale-105 transition-transform duration-300">
+              <div class="text-4xl font-extrabold text-quEmerald group-hover:scale-110 transition-transform duration-300">
+                <span class="counter" data-target="80">0</span>%
+              </div>
               <div class="mt-2 text-white/70">I.T./NYSC completion rate</div>
+              <div class="mt-1 text-quEmerald font-semibold text-sm">Higher success rate</div>
+              <div class="progress-bar mt-3">
+                <div class="progress-fill" style="width: 80%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ROI Calculator -->
+        <div class="relative">
+          <h3 class="text-2xl md:text-3xl font-bold mb-6">ROI Calculator</h3>
+          <div class="glass-card rounded-xl p-6">
+            <div class="space-y-4">
+              <div>
+                <label class="block text-sm font-medium text-white/70 mb-2">Number of Students</label>
+                <input type="number" id="student-count" value="5000" min="100" max="50000" step="100" 
+                       class="w-full px-3 py-2 rounded-md border border-white/15 bg-white/5 text-white glow-input">
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-white/70 mb-2">Current Admin Staff</label>
+                <input type="number" id="admin-staff" value="20" min="1" max="100" step="1" 
+                       class="w-full px-3 py-2 rounded-md border border-white/15 bg-white/5 text-white glow-input">
+              </div>
+              <div class="pt-4 border-t border-white/10">
+                <div class="flex justify-between items-center mb-2">
+                  <span class="text-white/70">Annual Savings</span>
+                  <span id="annual-savings" class="text-quEmerald font-bold text-xl">₦2,500,000</span>
+                </div>
+                <div class="flex justify-between items-center mb-2">
+                  <span class="text-white/70">ROI Percentage</span>
+                  <span id="roi-percentage" class="text-quEmerald font-bold text-xl">650%</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-white/70">Payback Period</span>
+                  <span id="payback-period" class="text-quEmerald font-bold text-xl">1.8 months</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
         <!-- Modules Breakdown carousel style -->
-        <div id="modules" class="relative">
-          <h3 class="text-2xl md:text-3xl font-bold">Modules Breakdown</h3>
-          <div class="mt-6 relative overflow-hidden rounded-xl border border-white/10 group">
-            <div id="modules-slide" class="p-6 bg-white/5 min-h-[160px]"></div>
+        <div id="modules" class="relative mt-8">
+          <h3 class="text-2xl md:text-3xl font-bold mb-6">Modules Breakdown</h3>
+          <div class="mt-6 relative overflow-hidden rounded-xl glass-card group">
+            <div id="modules-slide" class="p-6 min-h-[160px]"></div>
             <div class="absolute inset-0 pointer-events-none mist" style="opacity:.12"></div>
-            <button id="mod-prev" aria-label="Previous module" class="absolute left-2 bottom-2 top-auto md:top-1/2 md:bottom-auto md:-translate-y-1/2 w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white opacity-0 group-hover:opacity-100 transition">‹</button>
-            <button id="mod-next" aria-label="Next module" class="absolute right-2 bottom-2 top-auto md:top-1/2 md:bottom-auto md:-translate-y-1/2 w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white opacity-0 group-hover:opacity-100 transition">›</button>
+            <button id="mod-prev" aria-label="Previous module" class="absolute left-2 bottom-2 top-auto md:top-1/2 md:bottom-auto md:-translate-y-1/2 w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white opacity-0 group-hover:opacity-100 transition hover:scale-110">‹</button>
+            <button id="mod-next" aria-label="Next module" class="absolute right-2 bottom-2 top-auto md:top-1/2 md:bottom-auto md:-translate-y-1/2 w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white opacity-0 group-hover:opacity-100 transition hover:scale-110">›</button>
           </div>
         </div>
       </div>
@@ -329,110 +648,225 @@
   </section>
 
   <!-- Team -->
-  <section id="team" class="relative py-20 bg-[#0b0b0b]">
+  <section id="team" class="relative py-20" style="background: var(--bg-secondary);">
     <div class="mist" aria-hidden="true" style="opacity:.15"></div>
     <div class="max-w-4xl mx-auto px-6 relative">
       <div class="text-center mb-12">
-        <h2 class="text-3xl md:text-4xl font-extrabold">Leadership Team</h2>
+        <h2 class="text-3xl md:text-4xl font-extrabold bg-gradient-to-r from-quEmerald to-quBlue bg-clip-text text-transparent">
+          Leadership Team
+        </h2>
         <p class="mt-3 text-white/70">Meet the visionaries behind Quiro's transformation of Nigerian universities.</p>
       </div>
       
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div class="p-6 rounded-xl border border-white/10 bg-white/5 card-mist text-center">
-          <div class="w-20 h-20 rounded-full bg-quEmerald/20 mx-auto mb-4 flex items-center justify-center">
-            <span class="text-2xl font-bold text-quEmerald">OS</span>
+        <div class="p-6 rounded-xl glass-card card-mist text-center group hover:scale-105 transition-transform duration-300">
+          <div class="w-24 h-24 rounded-full bg-gradient-to-br from-quEmerald/20 to-quBlue/20 mx-auto mb-4 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+            <span class="text-3xl font-bold text-quEmerald">OS</span>
           </div>
-          <h3 class="text-xl font-bold">Oluwatoni Sobande</h3>
+          <h3 class="text-xl font-bold group-hover:text-quEmerald transition-colors duration-300">Oluwatoni Sobande</h3>
           <p class="text-quEmerald font-semibold">Co-Founder & CEO</p>
           <p class="mt-3 text-white/70 text-sm">Leading Quiro's mission to revolutionize university management across Nigeria with innovative technology solutions.</p>
+          <div class="mt-4 flex justify-center space-x-2">
+            <div class="w-2 h-2 bg-quEmerald rounded-full"></div>
+            <div class="w-2 h-2 bg-quBlue rounded-full"></div>
+            <div class="w-2 h-2 bg-quGold rounded-full"></div>
+          </div>
         </div>
         
-        <div class="p-6 rounded-xl border border-white/10 bg-white/5 card-mist text-center">
-          <div class="w-20 h-20 rounded-full bg-quEmerald/20 mx-auto mb-4 flex items-center justify-center">
-            <span class="text-2xl font-bold text-quEmerald">MM</span>
+        <div class="p-6 rounded-xl glass-card card-mist text-center group hover:scale-105 transition-transform duration-300">
+          <div class="w-24 h-24 rounded-full bg-gradient-to-br from-quEmerald/20 to-quBlue/20 mx-auto mb-4 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+            <span class="text-3xl font-bold text-quEmerald">MM</span>
           </div>
-          <h3 class="text-xl font-bold">Mariam Muhammed</h3>
+          <h3 class="text-xl font-bold group-hover:text-quEmerald transition-colors duration-300">Mariam Muhammed</h3>
           <p class="text-quEmerald font-semibold">Co-Founder & CHRO</p>
           <p class="mt-3 text-white/70 text-sm">Driving human resources excellence and organizational development to support Quiro's growth and impact.</p>
+          <div class="mt-4 flex justify-center space-x-2">
+            <div class="w-2 h-2 bg-quEmerald rounded-full"></div>
+            <div class="w-2 h-2 bg-quBlue rounded-full"></div>
+            <div class="w-2 h-2 bg-quGold rounded-full"></div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- CTA -->
-  <section id="cta" class="relative py-20 bg-[#0b0b0b]">
+  <section id="cta" class="relative py-20" style="background: var(--bg-primary);">
     <div class="mist" aria-hidden="true" style="opacity:.2"></div>
     <div class="max-w-4xl mx-auto px-6 relative">
       <div class="text-center mb-10">
-        <h2 class="text-3xl md:text-4xl font-extrabold">Request Info</h2>
+        <h2 class="text-3xl md:text-4xl font-extrabold bg-gradient-to-r from-quEmerald to-quBlue bg-clip-text text-transparent">
+          Request Info
+        </h2>
         <p class="mt-3 text-white/70">See how Quiro can streamline operations for your university.</p>
       </div>
 
-      <form id="info-form" class="bg-black/60 border border-quEmerald/30 rounded-xl p-8 space-y-4"
+      <form id="info-form" class="glass-card rounded-xl p-8 space-y-6"
             action="https://formspree.io/f/mzzaklgw" method="POST">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <input class="w-full rounded-md border border-white/15 bg-white/5 px-3 py-3 glow-input"
-                 type="text" name="name" placeholder="Full Name" required />
-          <input class="w-full rounded-md border border-white/15 bg-white/5 px-3 py-3 glow-input"
-                 type="email" name="email" placeholder="Email Address" required />
-          <input class="w-full rounded-md border border-white/15 bg-white/5 px-3 py-3 glow-input md:col-span-2"
-                 type="text" name="university" placeholder="University Name" required />
-          <textarea class="w-full rounded-md border border-white/15 bg-white/5 px-3 py-3 glow-input md:col-span-2"
-                    name="message" rows="4" placeholder="Tell us about your needs (e.g., admissions, LMS)"></textarea>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="space-y-2">
+            <label class="block text-sm font-medium text-white/70">Full Name</label>
+            <input class="w-full rounded-md border border-white/15 bg-white/5 px-4 py-3 glow-input text-white placeholder-white/50"
+                   type="text" name="name" placeholder="Enter your full name" required />
         </div>
+          <div class="space-y-2">
+            <label class="block text-sm font-medium text-white/70">Email Address</label>
+            <input class="w-full rounded-md border border-white/15 bg-white/5 px-4 py-3 glow-input text-white placeholder-white/50"
+                   type="email" name="email" placeholder="Enter your email" required />
+          </div>
+          <div class="space-y-2 md:col-span-2">
+            <label class="block text-sm font-medium text-white/70">University Name</label>
+            <input class="w-full rounded-md border border-white/15 bg-white/5 px-4 py-3 glow-input text-white placeholder-white/50"
+                   type="text" name="university" placeholder="Enter your university name" required />
+          </div>
+          <div class="space-y-2 md:col-span-2">
+            <label class="block text-sm font-medium text-white/70">Tell us about your needs</label>
+            <textarea class="w-full rounded-md border border-white/15 bg-white/5 px-4 py-3 glow-input text-white placeholder-white/50 resize-none"
+                      name="message" rows="4" placeholder="e.g., admissions automation, LMS implementation, NYSC integration..."></textarea>
+          </div>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-4 items-center justify-between pt-4">
         <button id="submit-btn" type="submit"
-                class="mt-4 inline-flex items-center justify-center px-6 py-3 rounded-md bg-quEmerald text-black font-semibold hover:bg-emerald-500 transition">
+                  class="inline-flex items-center justify-center px-8 py-3 rounded-md bg-quEmerald text-black font-semibold hover:bg-emerald-500 transition hover:scale-105 hover:shadow-lg">
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+            </svg>
           Request Info
         </button>
-        <p id="form-success" class="hidden mt-3 text-quEmerald">Thanks! We’ll get back to you shortly.</p>
+          <div class="flex items-center text-sm text-white/60">
+            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+            </svg>
+            Secure & Confidential
+          </div>
+        </div>
+        <p id="form-success" class="hidden mt-4 p-4 rounded-md bg-quEmerald/10 border border-quEmerald/30 text-quEmerald text-center">
+          <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+          </svg>
+          Thanks! We'll get back to you shortly.
+        </p>
       </form>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer class="bg-black border-t border-white/10">
+  <footer class="glass border-t border-white/10">
     <div class="max-w-7xl mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-4 gap-8">
       <div>
-        <div class="text-xl font-extrabold">Quiro</div>
+        <div class="text-xl font-extrabold">
+          <span class="text-white">Qui</span><span class="text-quEmerald">ro</span>
+        </div>
         <p class="mt-3 text-white/60">Premium university management: fast, compliant, mobile-first.</p>
       </div>
 
       <div>
-        <div class="font-semibold">Contact</div>
-        <ul class="mt-3 space-y-2 text-white/70">
-          <li><a href="mailto:sobandeoluwatonie@gmail.com" class="hover:text-quEmerald transition">sobandeoluwatonie@gmail.com</a></li>
-          <li><a href="https://wa.me/2348120409164" target="_blank" rel="noopener" class="hover:text-quEmerald transition">WhatsApp: +234 812 040 9164</a></li>
-          
+        <div class="font-semibold text-white">Contact</div>
+        <div class="mt-3 space-y-4">
+          <div>
+            <div class="text-quEmerald font-medium text-sm mb-2">Oluwatoni Sobande (CEO)</div>
+            <ul class="space-y-2 text-white/70">
+              <li><a href="mailto:sobandeoluwatonie@gmail.com" class="hover:text-quEmerald transition flex items-center">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                </svg>
+                sobandeoluwatonie@gmail.com
+              </a></li>
+              <li><a href="https://wa.me/2348120409164" target="_blank" rel="noopener" class="hover:text-quEmerald transition flex items-center">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                </svg>
+                +234 812 040 9164
+              </a></li>
         </ul>
+          </div>
+          <div>
+            <div class="text-quEmerald font-medium text-sm mb-2">Mariam Muhammed (CHRO)</div>
+            <ul class="space-y-2 text-white/70">
+              <li><a href="mailto:parksaetbyul87@gmail.com" class="hover:text-quEmerald transition flex items-center">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                </svg>
+                parksaetbyul87@gmail.com
+              </a></li>
+              <li><a href="https://wa.me/2348140329890" target="_blank" rel="noopener" class="hover:text-quEmerald transition flex items-center">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                </svg>
+                +234 814 032 9890
+              </a></li>
+            </ul>
+          </div>
+        </div>
       </div>
 
       <div>
-        <div class="font-semibold">Navigate</div>
+        <div class="font-semibold text-white">Navigate</div>
         <ul class="mt-3 space-y-2 text-white/70">
           <li><a href="#hero" class="hover:text-quEmerald transition">About</a></li>
           <li><a href="#features" class="hover:text-quEmerald transition">Features</a></li>
+          <li><a href="#benefits" class="hover:text-quEmerald transition">Benefits</a></li>
           <li><a href="#team" class="hover:text-quEmerald transition">Team</a></li>
-          <li><a href="#cta" class="hover:text-quEmerald transition">Contact</a></li>
+          <li><a href="pricing.html" class="hover:text-quEmerald transition">Pricing</a></li>
         </ul>
       </div>
 
       <div>
-        <div class="font-semibold">Quick Signup</div>
-        <form id="mini-form" action="https://formspree.io/f/mzzaklgw" method="POST" class="mt-3 flex gap-2">
-          <input class="flex-1 rounded-md border border-white/15 bg-white/5 px-3 py-2 glow-input"
+        <div class="font-semibold text-white">Quick Signup</div>
+        <form id="mini-form" action="https://formspree.io/f/mzzaklgw" method="POST" class="mt-3 space-y-3">
+          <input class="w-full rounded-md border border-white/15 bg-white/5 px-3 py-2 glow-input text-white placeholder-white/50"
                  type="email" name="email" placeholder="Email Address" required />
-          <button type="submit" class="px-4 py-2 rounded-md bg-quBlue hover:bg-blue-800 transition">Join</button>
+          <button type="submit" class="w-full px-4 py-2 rounded-md bg-quEmerald hover:bg-emerald-500 transition hover:scale-105 text-black font-semibold">
+            Join Waitlist
+          </button>
         </form>
+        <p class="mt-2 text-xs text-white/50">Get notified when we launch</p>
       </div>
     </div>
     <div class="border-t border-white/10 py-4 text-center text-white/50 text-sm">
-      © <span id="year"></span> Quiro. All rights reserved.
+      © <span id="year"></span> Quiro. All rights reserved. | Built for Nigerian Universities
     </div>
   </footer>
 
   <script>
+
     // Year
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // ROI Calculator
+    function updateROI() {
+      const studentCount = parseInt(document.getElementById('student-count').value) || 5000;
+      const adminStaff = parseInt(document.getElementById('admin-staff').value) || 20;
+      
+      // More realistic calculations based on actual university operations
+      // Base savings: ₦200 per student per year (reduced paperwork, faster processing)
+      const baseSavings = studentCount * 200;
+      
+      // Staff efficiency savings: 65% time reduction for admin staff
+      // Average admin staff salary: ₦50,000/month = ₦600,000/year
+      // 65% time savings = ₦390,000 per staff per year
+      const staffSavings = adminStaff * 390000;
+      
+      const totalSavings = baseSavings + staffSavings;
+      
+      // Implementation cost: ₦2M for setup, training, and first year
+      const implementationCost = 2000000;
+      
+      // Calculate ROI percentage
+      const roiPercentage = Math.round(((totalSavings - implementationCost) / implementationCost) * 100);
+      
+      // Calculate payback period in months
+      const paybackPeriod = Math.round((implementationCost / totalSavings) * 12 * 10) / 10;
+      
+      // Update display
+      document.getElementById('annual-savings').textContent = `₦${totalSavings.toLocaleString()}`;
+      document.getElementById('roi-percentage').textContent = `${roiPercentage}%`;
+      document.getElementById('payback-period').textContent = `${paybackPeriod} months`;
+    }
+    
+    // Add event listeners for ROI calculator
+    document.getElementById('student-count').addEventListener('input', updateROI);
+    document.getElementById('admin-staff').addEventListener('input', updateROI);
 
     // Smooth scroll for anchors
     document.querySelectorAll('a[href^="#"]').forEach(a => {
@@ -458,10 +892,12 @@
       const t1 = gsap.timeline({ defaults: { ease: 'power2.out' } });
       t1.to('#hero-title', { opacity: 1, y: -8, duration: .8 })
         .to('#hero-sub', { opacity: 1, y: -6, duration: .7 }, '-=.3')
+        .to('#roi-preview', { opacity: 1, y: -4, duration: .6 }, '-=.2')
         .to('#hero-cta', { opacity: 1, y: -4, duration: .6 }, '-=.3')
         .to('#hero-note', { opacity: 1, duration: .6 }, '-=.4')
-        .to('#hero-coming', { opacity: 1, y: -2, duration: .6 }, '-=.2')
-        .to('#hero-title', { color: '#10B981', duration: 1 }, '+=.2');
+        .to('#hero-coming', { opacity: 1, y: -2, duration: .6 }, '-=.2');
+      
+      // Mobile menu functionality
       const menuBtn = document.getElementById('mobile-menu-btn');
       const menu = document.getElementById('mobile-menu');
       if (menuBtn && menu) {
@@ -476,6 +912,9 @@
           }
         });
       }
+      
+      // Initialize ROI calculator
+      updateROI();
     });
 
     // Particles.js in hero (subtle mists)
@@ -588,36 +1027,170 @@
       startModules();
     }
 
-    // CTA form submission (Formspree)
+    // Enhanced form submission with better UX
     const form = document.getElementById('info-form');
     const successMsg = document.getElementById('form-success');
     const submitBtn = document.getElementById('submit-btn');
+    
+    if (form) {
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       submitBtn.disabled = true;
-      submitBtn.textContent = 'Sending...';
+        submitBtn.innerHTML = `
+          <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-black" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+          Sending...
+        `;
+        
       try {
         const formData = new FormData(form);
-        const res = await fetch(form.action, { method: 'POST', body: formData, headers: { 'Accept': 'application/json' } });
+          const res = await fetch(form.action, { 
+            method: 'POST', 
+            body: formData, 
+            headers: { 'Accept': 'application/json' } 
+          });
+          
         if (res.ok) {
-          gsap.to(successMsg, { display: 'block', opacity: 1, color: '#10B981', duration: .6 });
+            gsap.to(successMsg, { 
+              display: 'block', 
+              opacity: 1, 
+              duration: 0.6,
+              ease: 'power2.out'
+            });
           form.reset();
+            // Scroll to success message
+            successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
         } else {
-          alert('Submission failed. Please try again.');
+            throw new Error('Submission failed');
         }
-      } catch {
-        alert('Network error. Please try again.');
+        } catch (error) {
+          console.error('Form submission error:', error);
+          alert('Submission failed. Please try again or contact us directly.');
       } finally {
         submitBtn.disabled = false;
-        submitBtn.textContent = 'Request Info';
-      }
-    });
+          submitBtn.innerHTML = `
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+            </svg>
+            Request Info
+          `;
+        }
+      });
+    }
 
-    // Footer mini-form (default submit to Formspree)
+    // Enhanced mini-form submission
     const miniForm = document.getElementById('mini-form');
+    if (miniForm) {
     miniForm.addEventListener('submit', async (e) => {
-      // Allow default submit; customize as needed
+        e.preventDefault();
+        const submitBtn = miniForm.querySelector('button[type="submit"]');
+        const originalText = submitBtn.textContent;
+        
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Joining...';
+        
+        try {
+          const formData = new FormData(miniForm);
+          const res = await fetch(miniForm.action, { 
+            method: 'POST', 
+            body: formData, 
+            headers: { 'Accept': 'application/json' } 
+          });
+          
+          if (res.ok) {
+            submitBtn.textContent = 'Joined!';
+            submitBtn.classList.add('bg-quEmerald');
+            miniForm.reset();
+            setTimeout(() => {
+              submitBtn.textContent = originalText;
+              submitBtn.classList.remove('bg-quEmerald');
+            }, 2000);
+          } else {
+            throw new Error('Submission failed');
+          }
+        } catch (error) {
+          console.error('Mini-form submission error:', error);
+          submitBtn.textContent = 'Try Again';
+          setTimeout(() => {
+            submitBtn.textContent = originalText;
+          }, 2000);
+        } finally {
+          submitBtn.disabled = false;
+        }
+      });
+    }
+
+    // Mobile swipe gestures for modules carousel
+    let startX = 0;
+    let startY = 0;
+    const modulesContainer = document.getElementById('modules-slide');
+    
+    if (modulesContainer) {
+      modulesContainer.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+      });
+      
+      modulesContainer.addEventListener('touchend', (e) => {
+        if (!startX || !startY) return;
+        
+        const endX = e.changedTouches[0].clientX;
+        const endY = e.changedTouches[0].clientY;
+        
+        const diffX = startX - endX;
+        const diffY = startY - endY;
+        
+        // Only trigger if horizontal swipe is more significant than vertical
+        if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
+          if (diffX > 0) {
+            // Swipe left - next module
+            const nextBtn = document.getElementById('mod-next');
+            if (nextBtn) nextBtn.click();
+          } else {
+            // Swipe right - previous module
+            const prevBtn = document.getElementById('mod-prev');
+            if (prevBtn) prevBtn.click();
+          }
+        }
+        
+        startX = 0;
+        startY = 0;
+      });
+    }
+
+    // Lazy loading for images
+    const images = document.querySelectorAll('img[data-src]');
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const img = entry.target;
+          img.src = img.dataset.src;
+          img.classList.remove('skeleton');
+          observer.unobserve(img);
+        }
+      });
     });
+    
+    images.forEach(img => imageObserver.observe(img));
+
+    // Performance optimization: Reduce particles on mobile
+    if (window.innerWidth < 768 && window.particlesJS) {
+      particlesJS('particles-hero', {
+        particles: {
+          number: { value: 15, density: { enable: true, value_area: 900 } },
+          color: { value: ['#10B981', '#1E3A8A'] },
+          shape: { type: 'circle' },
+          opacity: { value: 0.1, random: true },
+          size: { value: 2, random: true },
+          line_linked: { enable: false },
+          move: { enable: true, speed: 0.3, direction: 'none', out_mode: 'out' }
+        },
+        interactivity: { events: { onhover: { enable: false }, onclick: { enable: false }, resize: true } },
+        retina_detect: true
+      });
+    }
   </script>
 </body>
 </html>
